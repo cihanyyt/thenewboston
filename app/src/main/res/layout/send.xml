@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Travis is..."
+        android:id="@+id/tvQuestion" />
+
+    <RadioGroup
+        android:id="@+id/rgAnswers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/rCrazy"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Crazy"/>
+        <RadioButton
+            android:id="@+id/rSexy"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="SUPER SEXY"/>
+        <RadioButton
+            android:id="@+id/rBoth"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Both"/>
+    </RadioGroup>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Return"
+        android:id="@+id/bReturn" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/tvTest"
+        android:layout_gravity="center_vertical" />
+</LinearLayout>
