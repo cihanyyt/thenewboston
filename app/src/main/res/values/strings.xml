@@ -3,4 +3,5 @@
     <string name="hello">selam</string>
     <string name="ref">this is a reference</string>
     <string name="title">title</string>
+    <string name="typeACommand">Type a Command</string>
 </resources>
