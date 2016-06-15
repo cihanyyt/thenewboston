@@ -4,6 +4,7 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -16,7 +17,6 @@ public class Menu extends ListActivity{
 
     String classes[] = {"startingPoint","TextPlay","Email",
             "Camera","Data","example5","example6"};
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,5 +44,16 @@ public class Menu extends ListActivity{
         MenuInflater blowUp = getMenuInflater();
         blowUp.inflate(R.menu.cool_menu,menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.aboutUs:
+                break;
+            case R.id.preferences:
+                break;
+        }
+        return false;
     }
 }
