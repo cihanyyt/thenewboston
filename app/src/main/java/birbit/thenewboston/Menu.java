@@ -50,8 +50,13 @@ public class Menu extends ListActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.aboutUs:
+                startActivity(new Intent("birbit.thenewboston.ABOUT"));
                 break;
             case R.id.preferences:
+                startActivity(new Intent("birbit.thenewboston.PREFS"));
+                break;
+            case R.id.exit:
+                finish();
                 break;
         }
         return false;

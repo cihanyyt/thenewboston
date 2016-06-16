@@ -10,4 +10,8 @@
         android:title="Preferences"
         android:id="@+id/preferences"
         />
+    <item
+        android:title="Exit"
+        android:id="@+id/exit"
+        />
 </menu>
