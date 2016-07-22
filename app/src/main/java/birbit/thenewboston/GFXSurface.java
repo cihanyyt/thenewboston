@@ -25,12 +25,7 @@ public class GFXSurface extends Activity implements View.OnTouchListener {
 
         ourSurfaceView = new MyBringBackSurface(this);
         ourSurfaceView.setOnTouchListener(this);
-        x = 0;
-        y = 0;
-        sX = 0;
-        sY = 0;
-        fX = 0;
-        fY = 0;
+        x = y = sX = sY = fX = fY = 0;
         dX = dY = aniX = aniY = scaX = scaY = 0;
 
         test = BitmapFactory.decodeResource(getResources(),R.drawable.monster);
