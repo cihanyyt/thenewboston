@@ -48,7 +48,7 @@ public class GFXSurface extends Activity implements View.OnTouchListener {
         x = event.getX();
         y = event.getY();
 
-        return false;
+        return true;
     }
 
     public class MyBringBackSurface extends SurfaceView implements Runnable {
@@ -93,7 +93,7 @@ public class GFXSurface extends Activity implements View.OnTouchListener {
                 canvas.drawRGB(02,02,150);
                 if(x != 0 && y != 0){
                     Bitmap test = BitmapFactory.decodeResource(getResources(),R.drawable.monster);
-                    canvas.drawBitmap(test, x, y, null);
+                    canvas.drawBitmap(test, x-test.getWidth()/2, y-test.getHeight()/2, null);
                 }
                 ourHolder.unlockCanvasAndPost(canvas);
             }
