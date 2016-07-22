@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 
 /**
@@ -55,4 +57,9 @@ public class MyBringBack extends View{
 
         invalidate();
     }
+
+
+
+
+
 }
