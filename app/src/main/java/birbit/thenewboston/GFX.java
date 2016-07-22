@@ -4,12 +4,17 @@ import android.app.Activity;
 import android.os.Bundle;
 
 /**
- * Created by Z003EUNW on 6/15/2016.
+ * Created by Z003EUNW on 7/22/2016.
  */
-public class AbutUs extends Activity{
+public class GFX extends Activity{
+
+    MyBringBack ourView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.about);
+
+        ourView = new MyBringBack(this);
+        setContentView(ourView);
     }
 }
