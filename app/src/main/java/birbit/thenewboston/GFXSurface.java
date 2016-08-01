@@ -18,7 +18,9 @@ public class GFXSurface extends Activity implements View.OnTouchListener {
 
     MyBringBackSurface ourSurfaceView;
     float x, y, sX, sY, fX, fY, dX, dY, aniX, aniY, scaX, scaY;
-    Bitmap test, plus;
+    Bitmap monsterSmiling, monsterO;
+    boolean monsterShot;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,9 +29,10 @@ public class GFXSurface extends Activity implements View.OnTouchListener {
         ourSurfaceView.setOnTouchListener(this);
         x = y = sX = sY = fX = fY = 0;
         dX = dY = aniX = aniY = scaX = scaY = 0;
+        monsterShot = false;
 
-        test = BitmapFactory.decodeResource(getResources(),R.drawable.monster);
-        plus = BitmapFactory.decodeResource(getResources(),R.drawable.monster_selected);
+        monsterSmiling = BitmapFactory.decodeResource(getResources(),R.drawable.monster);
+        monsterO = BitmapFactory.decodeResource(getResources(),R.drawable.monster_selected);
 
         setContentView(ourSurfaceView);
     }
@@ -48,6 +51,13 @@ public class GFXSurface extends Activity implements View.OnTouchListener {
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         x = event.getX();
         y = event.getY();
 
@@ -56,6 +66,7 @@ public class GFXSurface extends Activity implements View.OnTouchListener {
                 sX = event.getX();
                 sY = event.getY();
                 dX = dY = aniX = aniY = scaX = scaY = fX = fY = 0;
+                monsterShot = false;
                 break;
             case MotionEvent.ACTION_UP:
                 fX = event.getX();
@@ -112,16 +123,19 @@ public class GFXSurface extends Activity implements View.OnTouchListener {
                 Canvas canvas = ourHolder.lockCanvas();
                 canvas.drawRGB(02,02,150);
 
-                if(x != 0 && y != 0){
-                    canvas.drawBitmap(test, x-test.getWidth()/2, y-test.getHeight()/2, null);
+                if((x != 0 && y != 0) ){
+                    canvas.drawBitmap(monsterSmiling, x- monsterSmiling.getWidth()/2, y- monsterSmiling.getHeight()/2, null);
                 }
-                if(sX != 0 && sY != 0){
-                    canvas.drawBitmap(plus, sX-plus.getWidth()/2, sY-plus.getHeight()/2, null);
+
+                if((sX != 0 && sY != 0 ) && ((monsterSmiling.getWidth()/2)-aniX == 0 )){
+                    canvas.drawBitmap(monsterO, sX- monsterO.getWidth()/2, sY- monsterO.getHeight()/2, null);
                 }
-                if(fX != 0 && fY != 0){
-                    canvas.drawBitmap(test, fX-(test.getWidth()/2)-aniX, fY-(test.getHeight()/2)-aniY, null);
-                    canvas.drawBitmap(plus, fX-(plus.getWidth()/2), fY-(plus.getHeight()/2), null);
+
+                if((fX != 0 && fY != 0) ){
+                    canvas.drawBitmap(monsterSmiling, fX-(monsterSmiling.getWidth()/2)-aniX, fY-(monsterSmiling.getHeight()/2)-aniY, null);
+                    //canvas.drawBitmap(monsterO, fX-(monsterO.getWidth()/2), fY-(monsterO.getHeight()/2), null);
                 }
+
                 aniX += scaX;
                 aniY += scaY;
 
