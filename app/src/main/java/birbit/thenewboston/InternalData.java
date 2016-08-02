@@ -3,6 +3,7 @@ package birbit.thenewboston;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -80,27 +81,51 @@ public class InternalData extends Activity implements View.OnClickListener {
                 }
                 break;
             case R.id.bLoad:
-                String collected = null;
-                FileInputStream fis = null;
+                new loadSomeStuff().execute(FILENAME);
+                break;
+        }
+    }
+
+    private class loadSomeStuff extends AsyncTask<String, Integer, String>{
+
+        protected void onPreExecute(String f){
+            //example of setting up something
+            f = "whatever";
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String collected = null;
+            FileInputStream fis = null;
+            try {
+                fis = openFileInput(FILENAME);
+                byte[] dataArray = new byte[fis.available()];
+                while(fis.read(dataArray) != -1){
+                    collected = new String(dataArray);
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
                 try {
-                    fis = openFileInput(FILENAME);
-                    byte[] dataArray = new byte[fis.available()];
-                    while(fis.read(dataArray) != -1){
-                        collected = new String(dataArray);
-                    }
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                    fis.close();
+                    return collected;
                 } catch (IOException e) {
                     e.printStackTrace();
-                } finally {
-                    try {
-                        fis.close();
-                        dataResults.setText(collected);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                 }
-                break;
+            }
+
+            return null;
+        }
+
+        protected void onProgressUpdated(Integer...progress){
+
+        }
+
+        protected void onPostExecute(String result){
+            dataResults.setText(result);
         }
     }
 }
