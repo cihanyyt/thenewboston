@@ -19,7 +19,8 @@ public class Menu extends ListActivity{
 
     String classes[] = {"startingPoint","TextPlay","Email",
             "Camera","Data","GFX","GFXSurface", "SoundStuff",
-            "Slider","Tabs","SimpleBrowser","Flipper", "SharedPrefs","InternalData"};
+            "Slider","Tabs","SimpleBrowser","Flipper", "SharedPrefs",
+            "InternalData", "ExternalData"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
