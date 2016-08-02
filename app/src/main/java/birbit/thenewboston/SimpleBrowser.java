@@ -1,8 +1,10 @@
 package birbit.thenewboston;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -22,8 +24,16 @@ public class SimpleBrowser extends Activity implements View.OnClickListener {
         setContentView(R.layout.simplebrowser);
 
         ourBrowser = (WebView) findViewById(R.id.wvBrowser);
+        ourBrowser.getSettings().setJavaScriptEnabled(true);
+        ourBrowser.getSettings().setLoadWithOverviewMode(true);
+        ourBrowser.getSettings().setUseWideViewPort(true);
+
         ourBrowser.setWebViewClient(new ourViewClient());
-        ourBrowser.loadUrl("http://cihanyesilyurt.com");
+        try {
+            ourBrowser.loadUrl("http://google.com");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         Button go = (Button) findViewById(R.id.bGo);
         Button refresh = (Button) findViewById(R.id.bRefresh);
@@ -45,6 +55,9 @@ public class SimpleBrowser extends Activity implements View.OnClickListener {
             case R.id.bGo:
                 String theWebsite = url.getText().toString();
                 ourBrowser.loadUrl(theWebsite);
+                //hiding keyboard after using edittext
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(url.getWindowToken(), 0);
                 break;
             case R.id.bRefresh:
                 ourBrowser.reload();
