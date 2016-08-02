@@ -2,6 +2,7 @@ package birbit.thenewboston;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TabHost;
@@ -10,9 +11,11 @@ import android.widget.TextView;
 /**
  * Created by cihany on 01/08/2016.
  */
-public class Tabs extends Activity implements View.OnClickListener {
+public class Tabs extends Activity implements View.OnClickListener, View.OnLongClickListener {
 
     TabHost th;
+    TextView showResults;
+    long start, stop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,11 @@ public class Tabs extends Activity implements View.OnClickListener {
         Button newTab = (Button) findViewById(R.id.bAddTab);
         Button bStart = (Button) findViewById(R.id.bStartWatch);
         Button bStop = (Button) findViewById(R.id.bStopWatch);
+        showResults = (TextView) findViewById(R.id.tvShowResults);
+
+        bStart.setOnClickListener(this);
+        bStop.setOnClickListener(this);
+
         newTab.setOnClickListener(this);
 
 
@@ -41,6 +49,8 @@ public class Tabs extends Activity implements View.OnClickListener {
         specs.setContent(R.id.tab3);
         specs.setIndicator("Add a Tab");
         th.addTab(specs);
+
+        start = 0;
     }
 
     @Override
@@ -60,9 +70,26 @@ public class Tabs extends Activity implements View.OnClickListener {
                 th.addTab(ourSpec);
                 break;
             case R.id.bStartWatch:
+                start = System.currentTimeMillis();
                 break;
             case R.id.bStopWatch:
+                stop = System.currentTimeMillis();
+
+                if(start != 0){
+                    long result = stop - start;
+                    int minutes = (int) result / 60000;
+                    int seconds = (int) (result - minutes * 60000) / 1000;
+                    int millis = (int) result - ((minutes*60+seconds)*1000);
+
+                    showResults.setText(String.format("%d:%02d:%02d", minutes, seconds, millis));
+                    start = stop = 0;
+                }
                 break;
         }
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        return false;
     }
 }
