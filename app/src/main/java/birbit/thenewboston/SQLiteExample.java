@@ -14,8 +14,8 @@ import android.widget.TextView;
  */
 public class SQLiteExample extends Activity implements View.OnClickListener {
 
-    Button sqlUpdate, sqlView;
-    EditText sqlName, sqlHotness;
+    Button sqlUpdate, sqlView, sqlModify, sqlGetInfo, sqlDelete;
+    EditText sqlName, sqlHotness, sqlRow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,14 @@ public class SQLiteExample extends Activity implements View.OnClickListener {
         sqlHotness = (EditText) findViewById(R.id.etSQLHotness);
         sqlView.setOnClickListener(this);
         sqlUpdate.setOnClickListener(this);
+
+        sqlRow = (EditText) findViewById(R.id.etSQLrowInfo);
+        sqlModify = (Button) findViewById(R.id.bSQLmodify);
+        sqlGetInfo = (Button) findViewById(R.id.bGetInfo);
+        sqlDelete = (Button) findViewById(R.id.bSQLdelete);
+        sqlDelete.setOnClickListener(this);
+        sqlModify.setOnClickListener(this);
+        sqlGetInfo.setOnClickListener(this);
     }
 
     @Override
@@ -65,6 +73,21 @@ public class SQLiteExample extends Activity implements View.OnClickListener {
             case R.id.bSQLopenView:
                 Intent i = new Intent("birbit.thenewboston.SQLVIEW");
                 startActivity(i);
+                break;
+
+            case R.id.bGetInfo:
+                String sRowID = sqlRow.getText().toString();
+                long rowID = Long.parseLong(sRowID);
+                HotOrNot hon = new HotOrNot(this);
+                hon.open();
+                String returnedName = hon.getName(rowID);
+                String returnedHotness = hon.getHotness(rowID);
+                hon.close();
+
+                sqlName.setText(returnedName);
+                sqlHotness.setText(returnedHotness);
+                break;
+            case R.id.bSQLmodify:
                 break;
         }
     }
