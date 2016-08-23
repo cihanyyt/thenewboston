@@ -101,6 +101,10 @@
             android:label="@string/app_name">
         </activity>
         <activity
+            android:name=".Accelerate"
+            android:label="@string/app_name">
+        </activity>
+        <activity
             android:name=".Email"
             android:label="@string/app_name">
         </activity>
