@@ -64,7 +64,6 @@ public class Accelerate extends Activity implements SensorEventListener {
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
     }
 
     public class MyBringBackSurface extends SurfaceView implements Runnable {
