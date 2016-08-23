@@ -24,6 +24,17 @@ public class HotOrNot {
     private final Context ourContext;
     private SQLiteDatabase ourDatabase;
 
+    public void updateEntry(long lRow, String mName, String mHotness) throws SQLException {
+        ContentValues cvUpdate = new ContentValues();
+        cvUpdate.put(KEY_NAME,mName);
+        cvUpdate.put(KEY_HOTNESS,mHotness);
+        ourDatabase.update(DATABASE_TABLE,cvUpdate,KEY_ROWID + "=" + lRow, null);
+    }
+
+    public void deleteEntry(long lRow1) throws SQLException  {
+        ourDatabase.delete(DATABASE_TABLE, KEY_ROWID + "=" + lRow1, null);
+    }
+
     private static class DbHelper extends SQLiteOpenHelper{
 
         public DbHelper(Context context) {
@@ -50,7 +61,7 @@ public class HotOrNot {
         ourContext = c;
     }
 
-    public HotOrNot open()throws SQLException {
+    public HotOrNot open() throws SQLException {
         ourHelper = new DbHelper(ourContext);
         ourDatabase = ourHelper.getWritableDatabase();
         return this;
@@ -82,7 +93,7 @@ public class HotOrNot {
         return result;
     }
 
-    public String getName(long rowID) {
+    public String getName(long rowID) throws SQLException {
         String[] columns = new String[] {KEY_ROWID, KEY_NAME, KEY_HOTNESS};
         Cursor c = ourDatabase.query(DATABASE_TABLE, columns, KEY_ROWID + "=" + rowID, null, null, null, null);
         if(c!= null){
@@ -92,7 +103,7 @@ public class HotOrNot {
         return null;
     }
 
-    public String getHotness(long rowID) {
+    public String getHotness(long rowID) throws SQLException {
         String[] columns = new String[] {KEY_ROWID, KEY_NAME, KEY_HOTNESS};
         Cursor c = ourDatabase.query(DATABASE_TABLE, columns, KEY_ROWID + "=" + rowID, null, null, null, null);
         if(c!= null){
